@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "7dec3101-d8e1-426c-ab5b-c814fb7bb260",
+		"name": "Sales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20267073"
+	},
+	"item": [
+		{
+			"name": "AdminAPI's",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Sufiyan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sufiyankhanzada1254@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1123456789",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "1123456789",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Baseurl}}api/register",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 200)\r",
+									"{\r",
+									"    pm.environment.set(\"token\", JSON.parse(responseBody).token);\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "sufiyankhanzada1254@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Baseurl}}api/login",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "Bearer {{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
