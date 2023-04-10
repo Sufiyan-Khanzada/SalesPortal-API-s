@@ -16,9 +16,58 @@ class PassportController extends Controller
      *
      * @return json
      */
+
+
+
+    public function showall()
+    {
+        $users = User::all();
+        if($users==""){
+        return response()->json([
+            'success' => true,
+            'message' => 'Users Not Found Done.',
+            // 'data' => $Items
+
+        ], 404);
+        
+
+        }else{
+        return response()->json([
+            'success' => true,
+            'message' => 'Users Fetch Successfully Done.',
+            'data' => $users
+
+        ], 200);
+        
+    }
+}
+
+public function showallsales()
+    {
+        $users = User::all()->where('role','SalesPerson');
+        if($users==""){
+        return response()->json([
+            'success' => true,
+            'message' => 'Users Not Found Done.',
+            // 'data' => $Items
+
+        ], 404);
+        
+
+        }else{
+        return response()->json([
+            'success' => true,
+            'message' => 'Users Fetch Successfully Done.',
+            'data' => $users
+
+        ], 200);
+        
+    }
+}
+
     public function register(Request $request)
     {
-        $input = $request->only(['name', 'email', 'password','confirm_password','role']);
+        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
 
         $validate_data = [
             'name' => 'required|string|min:4',
@@ -26,6 +75,9 @@ class PassportController extends Controller
             'password' => 'required|min:8',
             'confirm_password' => 'same:password|required',
             'role'  => 'required',
+            'DOB'  => 'required',
+            'cnic'  => 'required',
+
         ];
 
         $validator = Validator::make($input, $validate_data);
@@ -44,6 +96,8 @@ class PassportController extends Controller
             'password' => Hash::make($input['password']),
             'confirm_password' => Hash::make($input['confirm_password']),
             'role'  => $input['role'],
+            'DOB'  => $input['DOB'],
+            'cnic'  => $input['cnic'],
 
         ]);
          
@@ -53,6 +107,152 @@ class PassportController extends Controller
         ], 200);
     }
  
+
+
+public function salesregister(Request $request)
+    {
+        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
+
+        $validate_data = [
+            'name' => 'required|string|min:4',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'confirm_password' => 'same:password|required',
+            // 'role'  => 'required',
+            'DOB'  => 'required',
+            'cnic'  => 'required',
+
+        ];
+
+        $validator = Validator::make($input, $validate_data);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please see errors parameter for all errors.',
+                'errors' => $validator->errors()
+            ]);
+        }
+ 
+        $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'confirm_password' => Hash::make($input['confirm_password']),
+            'role'  => $input['role']="SalesPerson",
+            'DOB'  => $input['DOB'],
+            'cnic'  => $input['cnic'],
+
+        ]);
+         
+        return response()->json([
+            'success' => true,
+            'message' => 'User registered succesfully, Use Login method to receive token.'
+        ], 200);
+    }
+ 
+
+  public function update_sales(Request $request , $id)
+    {
+
+            $sales = new User();
+            $sales = User::find($id);
+            if($sales){
+            $sales->name=$request->name;
+            $sales->email=$request->email;
+            $sales->password=Hash::make($request->password);
+            $sales->confirm_password=Hash::make($request->confirm_password);
+            $sales->DOB=$request->DOB;
+            $sales->cnic=$request->cnic;
+            $sales->save();
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Sales -> '.$id.' ->Details Updated Successfully.'
+        ], 200);
+
+            }
+            
+           
+
+            
+         }
+
+
+
+   public function update_admin(Request $request , $id)
+    {
+
+            $sales = new User();
+            $sales = User::find($id);
+
+            if($sales){
+            $sales->name=$request->name;
+            $sales->email=$request->email;
+            $sales->password=Hash::make($request->password);
+            $sales->confirm_password=Hash::make($request->confirm_password);
+            $sales->DOB=$request->DOB;
+            $sales->cnic=$request->cnic;
+            $sales->save();
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Admin Details Updated Successfully.'
+        ], 200);
+
+            }
+            
+           
+
+            
+         }      
+
+    // public function customerregister(Request $request)
+    // {
+    //     $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
+
+    //     $validate_data = [
+    //         'name' => 'required|string|min:4',
+    //         'email' => 'required|email',
+    //         'password' => 'required|min:8',
+    //         'confirm_password' => 'same:password|required',
+    //         'role'  => 'required',
+    //         'DOB'  => 'required',
+    //         'cnic'  => 'required',
+
+    //     ];
+
+    //     $validator = Validator::make($input, $validate_data);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Please see errors parameter for all errors.',
+    //             'errors' => $validator->errors()
+    //         ]);
+    //     }
+ 
+    //     $user = User::create([
+    //         'name' => $input['name'],
+    //         'email' => $input['email'],
+    //         'password' => Hash::make($input['password']),
+    //         'confirm_password' => Hash::make($input['confirm_password']),
+    //         'role'  => "Customer",
+    //         'DOB'  => $input['DOB'],
+    //         'cnic'  => $input['cnic'],
+
+    //     ]);
+         
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'User registered succesfully, Use Login method to receive token.'
+    //     ], 200);
+    // }
+ 
+
+
+
+
     /**
      * Login user.
      *
