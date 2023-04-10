@@ -201,10 +201,6 @@ public function salesregister(Request $request)
         ], 200);
 
             }
-            
-           
-
-            
          }      
 
     // public function customerregister(Request $request)

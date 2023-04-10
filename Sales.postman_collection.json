@@ -10,6 +10,531 @@
 			"name": "AdminAPI's",
 			"item": [
 				{
+					"name": "Referers",
+					"item": [
+						{
+							"name": "AllReferers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/allref",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"allref"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddReferers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Refer_name",
+											"value": "NewYear",
+											"type": "text"
+										},
+										{
+											"key": "Refer_value",
+											"value": "$200",
+											"type": "text"
+										},
+										{
+											"key": "Refer_status",
+											"value": "enbale",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/addref",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"addref"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateReferer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Refer_name",
+											"value": "NewYear",
+											"type": "text"
+										},
+										{
+											"key": "Refer_value",
+											"value": "$2001",
+											"type": "text"
+										},
+										{
+											"key": "Refer_status",
+											"value": "disable",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/updateref/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"updateref",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SingleRefere",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/singleref/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"singleref",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteReferer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/deleteref/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"deleteref",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pricings",
+					"item": [
+						{
+							"name": "AllPricings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/allpricing",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"allpricing"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddPricings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Plan_title",
+											"value": "Testing",
+											"type": "text"
+										},
+										{
+											"key": "Plan_tag_line",
+											"value": "Somethings New",
+											"type": "text"
+										},
+										{
+											"key": "Plan_price",
+											"value": "$2300",
+											"type": "text"
+										},
+										{
+											"key": "Plan_description",
+											"value": "Hello Dear",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/addpricing",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"addpricing"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePricings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Plan_title",
+											"value": "Testings",
+											"type": "text"
+										},
+										{
+											"key": "Plan_tag_line",
+											"value": "Something Great",
+											"type": "text"
+										},
+										{
+											"key": "Plan_price",
+											"value": "$2300",
+											"type": "text"
+										},
+										{
+											"key": "Plan_description",
+											"value": "Hello Dear",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/updatepricing/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"updatepricing",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeletePricings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/deletepricing/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"deletepricing",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SinglePricing",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/singlepricing/1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"singlepricing",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SalesPerson",
+					"item": [
+						{
+							"name": "SalesPersonRegister",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "sales123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "DOB",
+											"value": "24-01-2028",
+											"type": "text"
+										},
+										{
+											"key": "cnic",
+											"value": "3123233443432",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/register",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesPersonUpdate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "sales123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "DOB",
+											"value": "24-01-2028",
+											"type": "text"
+										},
+										{
+											"key": "cnic",
+											"value": "3123233443432",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/updatesales/2",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"updatesales",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AllSalesPerson",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/showsales",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"showsales"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesPerson Logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/logout",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesLogin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if(pm.response.code == 200)\r",
+											"{\r",
+											"    pm.environment.set(\"token\", JSON.parse(responseBody).token);\r",
+											"\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "sales123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1123456789",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/login",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SalesUserDetail(Token)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/user-detail",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"user-detail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateSales",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/updatesales/2",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"updatesales",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"item": []
+				},
+				{
 					"name": "Register",
 					"request": {
 						"method": "POST",
@@ -24,7 +549,7 @@
 								},
 								{
 									"key": "email",
-									"value": "sufiyankhanzada1254@gmail.com",
+									"value": "sufiyankhanzada12541@gmail.com",
 									"type": "text"
 								},
 								{
@@ -41,6 +566,16 @@
 									"key": "role",
 									"value": "admin",
 									"type": "text"
+								},
+								{
+									"key": "DOB",
+									"value": "24-01-2023",
+									"type": "text"
+								},
+								{
+									"key": "cnic",
+									"value": "4130234234324234",
+									"type": "text"
 								}
 							]
 						},
@@ -51,6 +586,64 @@
 							],
 							"path": [
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Sufiyan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sufiyankhanzada12541@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1123456789",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "1123456789",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "DOB",
+									"value": "24-01-2023",
+									"type": "text"
+								},
+								{
+									"key": "cnic",
+									"value": "4130234234324234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Baseurl}}api/updateadmin/2",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"updateadmin",
+								"2"
 							]
 						}
 					},
@@ -102,6 +695,57 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Baseurl}}api/logout",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShowAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Baseurl}}api/showadmin",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"showadmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserDetail(Token)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Baseurl}}api/user-detail",
+							"host": [
+								"{{Baseurl}}api"
+							],
+							"path": [
+								"user-detail"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -110,13 +754,13 @@
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "value",
-				"value": "Bearer {{token}}",
+				"key": "key",
+				"value": "Authorization",
 				"type": "string"
 			},
 			{
-				"key": "key",
-				"value": "header",
+				"key": "value",
+				"value": "Bearer {{token}}",
 				"type": "string"
 			}
 		]
