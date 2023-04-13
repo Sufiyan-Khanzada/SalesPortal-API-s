@@ -11,15 +11,15 @@ use Laravel\Passport\RefreshTokenRepository;
 
 class RefererController extends Controller
 {
-    
-      public function add(Request $request)
+
+    public function add(Request $request)
     {
         $input = $request->all();
         $validator = Validator::make($input, [
             'Refer_name' => 'required|string',
             'Refer_value' => 'required|string',
             'Refer_status' => 'required|string',
-  ]);
+        ]);
 
         if ($validator->fails()) {
             return response()->json([
@@ -27,32 +27,32 @@ class RefererController extends Controller
                 'message' => 'Please see errors parameter for all errors.',
                 'errors' => $validator->errors()
             ]);
-        }  
-            
-            $refers = new Referers();
-            $refers->Refer_name=$request->Refer_name;
-            $refers->Refer_value=$request->Refer_value;
-            $refers->Refer_status=$request->Refer_status;
-            $refers->save();
+        }
+
+        $refers = new Referers();
+        $refers->Refer_name = $request->Refer_name;
+        $refers->Refer_value = $request->Refer_value;
+        $refers->Refer_status = $request->Refer_status;
+        $refers->save();
 
 
-         
+
         return response()->json([
             'success' => true,
             'message' => 'Referer Added Successfully Done'
         ], 200);
     }
 
-      public function allrefers()
+    public function allrefers()
     {
         $refers = Referers::all();
-        if($refers->isEmpty()){
-        return response()->json([
-            'success' => true,
-            'message' => 'Refers Not Found Done.',
-            // 'data' => $Items
+        if ($refers->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Refers Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);        
+            ], 200);
         }
         return response()->json([
             'success' => true,
@@ -60,49 +60,44 @@ class RefererController extends Controller
             'data' => $refers
 
         ], 200);
-        
     }
 
-        public function update_ref(Request $request , $id)
+    public function update_ref(Request $request, $id)
     {
 
-            $refers = new Referers();
-            $refers = Referers::find($id);
-            $refers->Refer_name=$request->Refer_name;
-            $refers->Refer_value=$request->Refer_value;
-            $refers->Refer_status=$request->Refer_status;
-             $refers->save();
+        $refers = new Referers();
+        $refers = Referers::find($id);
+        $refers->Refer_name = $request->Refer_name;
+        $refers->Refer_value = $request->Refer_value;
+        $refers->Refer_status = $request->Refer_status;
+        $refers->save();
 
-            return response()->json([
-            'success' => true,
-            'message' => 'Referer Number -> '.$id.' ->Details Updated Successfully.'
-        ], 200);
-
-            
-         } 
-
-        public function destroy_ref($id)
-          {
-        $delete_refers = Referers::find($id);
-    
-        $delete_refers->delete();
- 
         return response()->json([
             'success' => true,
-            'message' => 'Referer Number->'.$id.'->Remove Successfully Done.'
+            'message' => 'Referer Number -> ' . $id . ' ->Details Updated Successfully.'
         ], 200);
-    
+    }
 
-        }
-
-         public function show_single_ref(Request $request , $id)
+    public function destroy_ref($id)
     {
-         $refers = Referers::where('id',$id)->get();
-      // $ids = $request->input('ids', []); // via injected instance of Request
-      // $items1 = items::whereIn('id', explode(',', $id))->get();
-      // $items1 = items::whereIn('id', explode(',', $id->$request->get()));
-        
-        if ($refers->isEmpty()){
+        $delete_refers = Referers::find($id);
+
+        $delete_refers->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Referer Number->' . $id . '->Remove Successfully Done.'
+        ], 200);
+    }
+
+    public function show_single_ref(Request $request, $id)
+    {
+        $refers = Referers::where('id', $id)->get();
+        // $ids = $request->input('ids', []); // via injected instance of Request
+        // $items1 = items::whereIn('id', explode(',', $id))->get();
+        // $items1 = items::whereIn('id', explode(',', $id->$request->get()));
+
+        if ($refers->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Referers Details Not Found'
@@ -110,15 +105,9 @@ class RefererController extends Controller
         }
 
         return response()->json([
-                'success' => true,
-                'message' => 'Referers Details Found',
-                'Referer' => $refers
-            ], 200);
-
-      
+            'success' => true,
+            'message' => 'Referers Details Found',
+            'Referer' => $refers
+        ], 200);
     }
-
-    
-
-
 }

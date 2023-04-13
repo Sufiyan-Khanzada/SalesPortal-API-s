@@ -49,11 +49,8 @@ Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_
 
 // put all api protected routes here
 Route::middleware('auth:api')->group(function () {
-    Route::post('user-detail', [PassportController::class, 'userDetail']);
+    Route::get('user-detail', [PassportController::class, 'userDetail']);
     Route::post('logout', [PassportController::class, 'logout']);
-
-     Route::post('salesperson/user-detail', [PassportController::class, 'userDetail']);
-    Route::post('salesperson/logout', [PassportController::class, 'logout']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
