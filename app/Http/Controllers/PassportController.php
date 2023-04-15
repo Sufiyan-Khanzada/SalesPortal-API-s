@@ -203,6 +203,52 @@ public function salesregister(Request $request)
             }
          }      
 
+
+public function Usersregister(Request $request)
+    {
+        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB']);
+
+        $validate_data = [
+            'name' => 'required|string|min:4',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'confirm_password' => 'same:password|required',
+            // 'role'  => 'required',
+            'DOB'  => 'required'
+,
+        ];
+
+        $validator = Validator::make($input, $validate_data);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please see errors parameter for all errors.',
+                'errors' => $validator->errors()
+            ]);
+        }
+ 
+        $user = User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'confirm_password' => Hash::make($input['confirm_password']),
+            'role'  => $input['role']="SalesPerson",
+            'DOB'  => $input['DOB'],
+            'cnic'  => $input['cnic'],
+
+        ]);
+         
+        return response()->json([
+            'success' => true,
+            'message' => 'User registered succesfully, Use Login method to receive token.'
+        ], 200);
+    }
+ 
+
+
+
+
     // public function customerregister(Request $request)
     // {
     //     $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
