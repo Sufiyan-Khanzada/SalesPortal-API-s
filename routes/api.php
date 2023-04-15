@@ -43,13 +43,13 @@ Route::post('salesperson/register', [PassportController::class, 'salesregister']
 Route::post('salesperson/login', [PassportController::class, 'login']);
 Route::get('salesperson/showsales', [PassportController::class, 'showallsales']);
 Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_sales']);
-
+Route::post('salesperson/salesref/{id}', [RefererController::class, 'check_ref_sale']);
 
 
 
 // put all api protected routes here
 Route::middleware('auth:api')->group(function () {
-    Route::post('user-detail', [PassportController::class, 'userDetail']);
+    Route::get('user-detail', [PassportController::class, 'userDetail']);
     Route::post('logout', [PassportController::class, 'logout']);
 
      Route::post('salesperson/user-detail', [PassportController::class, 'userDetail']);

@@ -118,6 +118,33 @@ class RefererController extends Controller
       
     }
 
+
+   public function check_ref_sale(Request $request , $id)
+    {
+         $refers = Referers::where('Refer_name',$id)
+                 ->count();
+      // $ids = $request->input('ids', []); // via injected instance of Request
+      // $items1 = items::whereIn('id', explode(',', $id))->get();
+      // $items1 = items::whereIn('id', explode(',', $id->$request->get()));
+        
+        if ($refers==null){
+            return response()->json([
+                'success' => false,
+                'message' => 'Referers Sales Details Not Found'
+            ], 404);
+        }
+
+        return response()->json([
+                'success' => true,
+                'message' => 'Referers Sales Details Found',
+                'Referer' => $refers
+            ], 200);
+
+      
+    }
+
+
+
     
 
 

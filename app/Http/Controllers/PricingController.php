@@ -19,6 +19,7 @@ class PricingController extends Controller
             'Plan_tag_line' => 'required|string',
             'Plan_price' => 'required|string',
             'Plan_description' => 'required|string',
+            'image' => 'required',
   ]);
 
         if ($validator->fails()) {
@@ -34,6 +35,7 @@ class PricingController extends Controller
             $pricing->Plan_tag_line=$request->Plan_tag_line;
             $pricing->Plan_price=$request->Plan_price;
             $pricing->Plan_description=$request->Plan_description;
+            $pricing->image=$request->image;
             
             $pricing->save();
 
@@ -74,6 +76,8 @@ class PricingController extends Controller
             $pricing->Plan_tag_line=$request->Plan_tag_line;
             $pricing->Plan_price=$request->Plan_price;
             $pricing->Plan_description=$request->Plan_description;
+            $pricing->image=$request->image;
+            
             $pricing->save();
 
             return response()->json([
