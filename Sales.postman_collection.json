@@ -189,6 +189,11 @@
 											"key": "Plan_description",
 											"value": "Hello Dear",
 											"type": "text"
+										},
+										{
+											"key": "image",
+											"value": "imagepath",
+											"type": "text"
 										}
 									]
 								},
@@ -510,6 +515,23 @@
 							"response": []
 						},
 						{
+							"name": "AllReferers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/allref",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"allref"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "UpdateSales",
 							"request": {
 								"method": "POST",
@@ -527,12 +549,286 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Check Referes Sales",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/salesref/NewYear1",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"salesref",
+										"NewYear1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
 					"name": "Forgot Password",
 					"item": []
+				},
+				{
+					"name": "Users API's",
+					"item": [
+						{
+							"name": "UsersRegister",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "client123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "11234567898",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "11234567898",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "Client",
+											"type": "text"
+										},
+										{
+											"key": "DOB",
+											"value": "24-01-2028",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"type": "text"
+										},
+										{
+											"key": "referby",
+											"value": "sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "referprice",
+											"value": "2300",
+											"type": "text"
+										},
+										{
+											"key": "profilepic",
+											"value": "image path ayegaa",
+											"type": "text"
+										},
+										{
+											"key": "referal",
+											"value": "shfkjhsdjkfhjksdhf",
+											"type": "text"
+										},
+										{
+											"key": "firstname",
+											"value": "sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "khanzada",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/clients/register",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"clients",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UsersUpdate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Sufiyan",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "sales123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "1123456789",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "DOB",
+											"value": "24-01-2028",
+											"type": "text"
+										},
+										{
+											"key": "cnic",
+											"value": "3123233443432",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/updatesales/2",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"updatesales",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/clients/showclients",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"clients",
+										"showclients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users Logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/logout",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if(pm.response.code == 200)\r",
+											"{\r",
+											"    pm.environment.set(\"token\", JSON.parse(responseBody).token);\r",
+											"\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "sales123@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1123456789",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/login",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UsersUserDetail(Token)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{Baseurl}}api/salesperson/user-detail",
+									"host": [
+										"{{Baseurl}}api"
+									],
+									"path": [
+										"salesperson",
+										"user-detail"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Register",
@@ -733,7 +1029,7 @@
 				{
 					"name": "UserDetail(Token)",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
 							"raw": "{{Baseurl}}api/user-detail",
