@@ -15,6 +15,8 @@ return new class extends Migration
             //
              $table->string('DOB');
              $table->string('cnic');
+             $table->string('referal')->nullable();
+             
            
         });
     }

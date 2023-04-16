@@ -47,13 +47,27 @@ Route::post('salesperson/salesref/{id}', [RefererController::class, 'check_ref_s
 
 
 
+
+/////Clients ////////////
+Route::post('clients/register', [PassportController::class, 'Usersregister']);
+Route::get('clients/showclients', [PassportController::class, 'showallclients']);
+Route::post('clients/login', [PassportController::class, 'login']);
+// Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_sales']);
+
+
+
 // put all api protected routes here
 Route::middleware('auth:api')->group(function () {
     Route::get('user-detail', [PassportController::class, 'userDetail']);
     Route::post('logout', [PassportController::class, 'logout']);
 
-     Route::post('salesperson/user-detail', [PassportController::class, 'userDetail']);
+     Route::get('salesperson/user-detail', [PassportController::class, 'userDetail']);
     Route::post('salesperson/logout', [PassportController::class, 'logout']);
+
+     Route::get('clients/user-detail', [PassportController::class, 'userDetail']);
+    Route::post('clients/logout', [PassportController::class, 'logout']);
+
+
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
