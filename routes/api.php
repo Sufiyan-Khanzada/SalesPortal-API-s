@@ -53,7 +53,7 @@ Route::post('clients/register', [PassportController::class, 'Usersregister']);
 Route::get('clients/showclients', [PassportController::class, 'showallclients']);
 Route::post('clients/login', [PassportController::class, 'login']);
 // Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_sales']);
-
+Route::get('salesperson/show/{id}', [PassportController::class, 'show']);
 
 
 // put all api protected routes here

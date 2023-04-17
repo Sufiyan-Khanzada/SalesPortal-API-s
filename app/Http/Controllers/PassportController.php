@@ -425,6 +425,26 @@ public function Usersregister(Request $request)
         ], 200);
     }
 
+
+    public function show($id)
+    {
+        $user = User::where('id', $id)->get();
+
+        if ($user->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User Details Not Found'
+            ], 404);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'User Details Found',
+            'data' => $user
+        ], 200);
+    }
+
+
+
     /**
      * Logout user.
      *
