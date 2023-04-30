@@ -3,8 +3,7 @@
 		"_postman_id": "7dec3101-d8e1-426c-ab5b-c814fb7bb260",
 		"name": "Sales",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20267073",
-		"_collection_link": "https://crimson-equinox-250995.postman.co/workspace/SalesPortal~92825f90-9b92-49c8-a20c-3b7f5593b057/collection/20267073-7dec3101-d8e1-426c-ab5b-c814fb7bb260?action=share&creator=20267073&source=collection_link"
+		"_exporter_id": "20267073"
 	},
 	"item": [
 		{
@@ -283,24 +282,6 @@
 									],
 									"path": [
 										"singlepricing",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Apply Refer in Pricing",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Baseurl}}api/allpricingcut/1",
-									"host": [
-										"{{Baseurl}}api"
-									],
-									"path": [
-										"allpricingcut",
 										"1"
 									]
 								}
@@ -587,25 +568,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "showsalesPerson Sales",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Baseurl}}api/salesperson/showsales/3",
-									"host": [
-										"{{Baseurl}}api"
-									],
-									"path": [
-										"salesperson",
-										"showsales",
-										"3"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -825,23 +787,23 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "client123@example.com",
+											"value": "sales123@example.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "11234567898",
+											"value": "1123456789",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{Baseurl}}api/clients/login",
+									"raw": "{{Baseurl}}api/salesperson/login",
 									"host": [
 										"{{Baseurl}}api"
 									],
 									"path": [
-										"clients",
+										"salesperson",
 										"login"
 									]
 								}
@@ -851,120 +813,16 @@
 						{
 							"name": "UsersUserDetail(Token)",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{Baseurl}}api/clients/user-detail",
+									"raw": "{{Baseurl}}api/salesperson/user-detail",
 									"host": [
 										"{{Baseurl}}api"
 									],
 									"path": [
-										"clients",
+										"salesperson",
 										"user-detail"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "ShowAll Clients Sales",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{Baseurl}}api/clients/allpurchasings/2",
-									"host": [
-										"{{Baseurl}}api"
-									],
-									"path": [
-										"clients",
-										"allpurchasings",
-										"2"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Purhcase",
-					"item": [
-						{
-							"name": "Add Item",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{Baseurl}}api/addorder?First_name=Sufiyan&Last_name=khanzada&Email=sufiyankhanzada1254@gmail.com&Paymode=Half&referid=2&referby=3&amount=4500&Product_ids[]=23,43,55&Total=2250&Remaining_Amount=0&user_id=2",
-									"host": [
-										"{{Baseurl}}api"
-									],
-									"path": [
-										"addorder"
-									],
-									"query": [
-										{
-											"key": "First_name",
-											"value": "Sufiyan"
-										},
-										{
-											"key": "Last_name",
-											"value": "khanzada"
-										},
-										{
-											"key": "Email",
-											"value": "sufiyankhanzada1254@gmail.com"
-										},
-										{
-											"key": "Paymode",
-											"value": "Half"
-										},
-										{
-											"key": "referid",
-											"value": "2"
-										},
-										{
-											"key": "referby",
-											"value": "3"
-										},
-										{
-											"key": "amount",
-											"value": "4500"
-										},
-										{
-											"key": "Product_ids[]",
-											"value": "23,43,55"
-										},
-										{
-											"key": "Total",
-											"value": "2250"
-										},
-										{
-											"key": "Remaining_Amount",
-											"value": "0"
-										},
-										{
-											"key": "user_id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "All Orders",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Baseurl}}api/allorders",
-									"host": [
-										"{{Baseurl}}api"
-									],
-									"path": [
-										"allorders"
 									]
 								}
 							},
@@ -1180,23 +1038,6 @@
 							],
 							"path": [
 								"user-detail"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Show All Purchases",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Baseurl}}api/allorders",
-							"host": [
-								"{{Baseurl}}api"
-							],
-							"path": [
-								"allorders"
 							]
 						}
 					},
