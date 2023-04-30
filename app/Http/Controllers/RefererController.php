@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Referers;
+use App\Models\Pricings;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\TokenRepository;
@@ -144,8 +145,50 @@ class RefererController extends Controller
     }
 
 
+     public function allPricing_after_Cuting(Request $request , $id)
+    {
+        $pricing = Pricings::all();
 
-    
+       // $pricing1 = Referers::select('Refer_value')->where('id',$id)->get();
+
+         // return response()->json([
+         //        'success' => true,
+         //        'message' => 'Referers Sales Details Found',
+         //        'Referer' => $pricing1
+         //    ], 200);
 
 
+        if($pricing->isEmpty()){
+        return response()->json([
+            'success' => true,
+            'message' => 'Pricing Not Found Done.',
+            // 'data' => $Items
+
+        ], 404);        
+        }
+
+    foreach ($pricing as $user) {
+        // echo $user->plan_price - $pricing1;
+         $discount = Referers::where('id', $id)->value('Refer_value');
+         $price = intval($user->Plan_price) - intval($discount);
+
+         $data[] = [
+            'Plan_Name' => $user->Plan_title,
+            'Plan_price' => "$".$user->Plan_price,
+            'Plan_description' => $user->Plan_description,
+            'Referer_Discount' => "$".$discount,
+            'Plan_price_after_discount' => "$".$price,
+           
+        ];
+
+
+         // echo "Price: " . $price . "<br><br>";
+    }
+     return response()->json([
+                'success' => true,
+                'message' => 'Referers Sales Details Found',
+                'data' => $data
+            ], 200);
+
+}
 }

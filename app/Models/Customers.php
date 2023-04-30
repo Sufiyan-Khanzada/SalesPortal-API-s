@@ -16,7 +16,7 @@ class Customers extends Model
         'DOB',
         'gender',
         'referby',
-        'referprice',
+        'referid',
         'profilepic',
 
     ];

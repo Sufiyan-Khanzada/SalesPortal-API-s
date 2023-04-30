@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\RefererController;
 use App\Http\Controllers\PricingController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\CustomersController;
+
+
+
 
 
 /*
@@ -23,7 +29,7 @@ Route::post('login', [PassportController::class, 'login']);
 Route::get('showadmin', [PassportController::class, 'showall']);
 Route::post('updateadmin/{id}', [PassportController::class, 'update_admin']);
 
-///Referers Routes///////
+    ///Referers Routes///////
 Route::get('allref', [RefererController::class, 'allrefers']);
 Route::post('addref', [RefererController::class, 'add']);
 Route::post('updateref/{id}', [RefererController::class, 'update_ref']);
@@ -36,6 +42,11 @@ Route::post('addpricing', [PricingController::class, 'addPricing']);
 Route::post('updatepricing/{id}', [PricingController::class, 'update_pricing']);
 Route::post('deletepricing/{id}', [PricingController::class, 'destroy_pricing']);
 Route::get('singlepricing/{id}', [PricingController::class, 'show_single_pricing']);
+
+Route::get('allpricingcut/{id}', [RefererController::class, 'allPricing_after_Cuting']);
+
+
+
 
 
 ///Sales Routes////
@@ -54,6 +65,22 @@ Route::get('clients/showclients', [PassportController::class, 'showallclients'])
 Route::post('clients/login', [PassportController::class, 'login']);
 // Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_sales']);
 Route::get('salesperson/show/{id}', [PassportController::class, 'show']);
+
+Route::get('salesperson/showsales/{id}', [SalesController::class, 'show_single_sale_record']);
+
+Route::post('clients/allpurchasings/{id}', [CustomersController::class, 'show_single_customer_record']);
+
+
+
+///////////Purchase API's///////////////////
+Route::post('addorder', [PurchaseController::class, 'add']);
+Route::get('allorders', [PurchaseController::class, 'allPurchases']);
+Route::post('delete-order/{id}', [PurchaseController::class, 'destroy_Purchases']);
+Route::post('update-order/{id}',[PurchaseController::class,'update_Purchases']);
+
+
+
+
 
 
 // put all api protected routes here

@@ -267,13 +267,10 @@ public function Usersregister(Request $request)
             'DOB'  => $input['DOB'],
             'referal' => $input['referal'],
             'role' => $input['role']
-            
-
-        ]);
-
+      ]);
 
                //////second Validotor////
-        $input1 = $request->only(['firstname', 'lastname', 'email','DOB','gender','referby','referprice','profilepic']);
+        $input1 = $request->only(['firstname', 'lastname', 'email','DOB','gender','referby','referid','profilepic']);
 
         $validate_data1 = [
             'firstname' => 'required|string|min:4',
@@ -282,7 +279,7 @@ public function Usersregister(Request $request)
             'DOB' => 'required|min:8',
             'gender' => 'required',
             'referby'  => 'required',
-            'referprice'  => 'required',
+            'referid'  => 'required',
             'profilepic' =>'required',
 
 
@@ -307,7 +304,7 @@ public function Usersregister(Request $request)
             $clients->DOB=$request->DOB;
             $clients->gender=$request->gender;
             $clients->referby=$request->referby;
-            $clients->referprice=$request->referprice;
+            $clients->referid=$request->referid;
             $clients->profilepic=$request->profilepic;
             $clients->save();
  
