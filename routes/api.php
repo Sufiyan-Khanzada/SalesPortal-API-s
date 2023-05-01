@@ -29,7 +29,7 @@ Route::post('login', [PassportController::class, 'login']);
 Route::get('showadmin', [PassportController::class, 'showall']);
 Route::post('updateadmin/{id}', [PassportController::class, 'update_admin']);
 
-    ///Referers Routes///////
+///Referers Routes///////
 Route::get('allref', [RefererController::class, 'allrefers']);
 Route::post('addref', [RefererController::class, 'add']);
 Route::post('updateref/{id}', [RefererController::class, 'update_ref']);
@@ -70,13 +70,13 @@ Route::get('salesperson/showsales/{id}', [SalesController::class, 'show_single_s
 
 Route::post('clients/allpurchasings/{id}', [CustomersController::class, 'show_single_customer_record']);
 
-
+Route::get('clients/customer/{id}', [CustomersController::class, 'show_single_customer']);
 
 ///////////Purchase API's///////////////////
 Route::post('addorder', [PurchaseController::class, 'add']);
 Route::get('allorders', [PurchaseController::class, 'allPurchases']);
 Route::post('delete-order/{id}', [PurchaseController::class, 'destroy_Purchases']);
-Route::post('update-order/{id}',[PurchaseController::class,'update_Purchases']);
+Route::post('update-order/{id}', [PurchaseController::class, 'update_Purchases']);
 
 
 
@@ -88,13 +88,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('user-detail', [PassportController::class, 'userDetail']);
     Route::post('logout', [PassportController::class, 'logout']);
 
-     Route::get('salesperson/user-detail', [PassportController::class, 'userDetail']);
+    Route::get('salesperson/user-detail', [PassportController::class, 'userDetail']);
     Route::post('salesperson/logout', [PassportController::class, 'logout']);
 
-     Route::get('clients/user-detail', [PassportController::class, 'userDetail']);
+    Route::get('clients/user-detail', [PassportController::class, 'userDetail']);
     Route::post('clients/logout', [PassportController::class, 'logout']);
-
-
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
