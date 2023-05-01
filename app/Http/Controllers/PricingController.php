@@ -11,7 +11,7 @@ use App\Models\Pricings;
 
 class PricingController extends Controller
 {
-      public function addPricing(Request $request)
+    public function addPricing(Request $request)
     {
         $input = $request->all();
         $validator = Validator::make($input, [
@@ -20,7 +20,7 @@ class PricingController extends Controller
             'Plan_price' => 'required|string',
             'Plan_description' => 'required|string',
             'image' => 'required',
-  ]);
+        ]);
 
         if ($validator->fails()) {
             return response()->json([
@@ -28,35 +28,35 @@ class PricingController extends Controller
                 'message' => 'Please see errors parameter for all errors.',
                 'errors' => $validator->errors()
             ]);
-        }  
-            
-            $pricing = new Pricings();
-            $pricing->Plan_title=$request->Plan_title;
-            $pricing->Plan_tag_line=$request->Plan_tag_line;
-            $pricing->Plan_price=$request->Plan_price;
-            $pricing->Plan_description=$request->Plan_description;
-            $pricing->image=$request->image;
-            
-            $pricing->save();
+        }
+
+        $pricing = new Pricings();
+        $pricing->Plan_title = $request->Plan_title;
+        $pricing->Plan_tag_line = $request->Plan_tag_line;
+        $pricing->Plan_price = $request->Plan_price;
+        $pricing->Plan_description = $request->Plan_description;
+        $pricing->image = $request->image;
+
+        $pricing->save();
 
 
-         
+
         return response()->json([
             'success' => true,
             'message' => 'Pricings Added Successfully Done'
         ], 200);
     }
 
-      public function allPricing()
+    public function allPricing()
     {
         $pricing = Pricings::all();
-        if($pricing->isEmpty()){
-        return response()->json([
-            'success' => true,
-            'message' => 'Pricing Not Found Done.',
-            // 'data' => $Items
+        if ($pricing->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Pricing Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);        
+            ], 404);
         }
         return response()->json([
             'success' => true,
@@ -64,52 +64,47 @@ class PricingController extends Controller
             'data' => $pricing
 
         ], 200);
-        
     }
 
-        public function update_pricing(Request $request , $id)
+    public function update_pricing(Request $request, $id)
     {
 
-            $pricing = new Pricings();
-            $pricing = Pricings::find($id);
-            $pricing->Plan_title=$request->Plan_title;
-            $pricing->Plan_tag_line=$request->Plan_tag_line;
-            $pricing->Plan_price=$request->Plan_price;
-            $pricing->Plan_description=$request->Plan_description;
-            $pricing->image=$request->image;
-            
-            $pricing->save();
+        $pricing = new Pricings();
+        $pricing = Pricings::find($id);
+        $pricing->Plan_title = $request->Plan_title;
+        $pricing->Plan_tag_line = $request->Plan_tag_line;
+        $pricing->Plan_price = $request->Plan_price;
+        $pricing->Plan_description = $request->Plan_description;
+        $pricing->image = $request->image;
 
-            return response()->json([
-            'success' => true,
-            'message' => 'Pricings Number -> '.$id.' ->Details Updated Successfully.'
-        ], 200);
+        $pricing->save();
 
-            
-         } 
-
-        public function destroy_pricing($id)
-          {
-        $delete_Pricing = Pricings::find($id);
-    
-        $delete_Pricing->delete();
- 
         return response()->json([
             'success' => true,
-            'message' => 'Pricing Number->'.$id.'->Remove Successfully Done.'
+            'message' => 'Pricings Number -> ' . $id . ' ->Details Updated Successfully.'
         ], 200);
-    
+    }
 
-        }
-
-         public function show_single_pricing(Request $request , $id)
+    public function destroy_pricing($id)
     {
-         $pricing = Pricings::where('id',$id)->get();
-      // $ids = $request->input('ids', []); // via injected instance of Request
-      // $items1 = items::whereIn('id', explode(',', $id))->get();
-      // $items1 = items::whereIn('id', explode(',', $id->$request->get()));
-        
-        if ($pricing->isEmpty()){
+        $delete_Pricing = Pricings::find($id);
+
+        $delete_Pricing->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pricing Number->' . $id . '->Remove Successfully Done.'
+        ], 200);
+    }
+
+    public function show_single_pricing(Request $request, $id)
+    {
+        $pricing = Pricings::where('id', $id)->get();
+        // $ids = $request->input('ids', []); // via injected instance of Request
+        // $items1 = items::whereIn('id', explode(',', $id))->get();
+        // $items1 = items::whereIn('id', explode(',', $id->$request->get()));
+
+        if ($pricing->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Pricings Details Not Found'
@@ -117,12 +112,9 @@ class PricingController extends Controller
         }
 
         return response()->json([
-                'success' => true,
-                'message' => 'Pricings Details Found',
-                'Pricing' => $pricing
-            ], 200);
-
-      
+            'success' => true,
+            'message' => 'Pricings Details Found',
+            'Pricing' => $pricing
+        ], 200);
     }
-
 }

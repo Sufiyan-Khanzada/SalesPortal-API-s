@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //
-         Schema::table('pricings', function (Blueprint $table) {
+        Schema::table('pricings', function (Blueprint $table) {
             //
-             $table->string('image');
-             
-           
+            $table->string('image');
         });
     }
 

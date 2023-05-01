@@ -24,80 +24,71 @@ class PassportController extends Controller
     public function showall()
     {
         $users = User::all();
-        if($users==""){
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Not Found Done.',
-            // 'data' => $Items
+        if ($users == "") {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);
-        
+            ], 404);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Fetch Successfully Done.',
+                'data' => $users
 
-        }else{
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Fetch Successfully Done.',
-            'data' => $users
-
-        ], 200);
-        
+            ], 200);
+        }
     }
-}
 
 
 
-public function showallsales()
+    public function showallsales()
     {
-        $users = User::all()->where('role','SalesPerson');
-        if($users==""){
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Not Found Done.',
-            // 'data' => $Items
+        $users = User::all()->where('role', 'SalesPerson');
+        if ($users == "") {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);
-        
+            ], 404);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Fetch Successfully Done.',
+                'data' => $users
 
-        }else{
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Fetch Successfully Done.',
-            'data' => $users
-
-        ], 200);
-        
+            ], 200);
+        }
     }
-}
 
-  public function showallclients()
+    public function showallclients()
     {
-        $users = $users = User::all()->where('role','Client');
-        if($users==""){
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Not Found Done.',
-            // 'data' => $Items
+        $users = $users = User::all()->where('role', 'Client');
+        if ($users == "") {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);
-        
+            ], 404);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Users Fetch Successfully Done.',
+                'data' => $users
 
-        }else{
-        return response()->json([
-            'success' => true,
-            'message' => 'Users Fetch Successfully Done.',
-            'data' => $users
-
-        ], 200);
-        
+            ], 200);
+        }
     }
-}
 
 
 
 
     public function register(Request $request)
     {
-        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
+        $input = $request->only(['name', 'email', 'password', 'confirm_password', 'role', 'DOB', 'cnic']);
 
         $validate_data = [
             'name' => 'required|string|min:4',
@@ -119,7 +110,7 @@ public function showallsales()
                 'errors' => $validator->errors()
             ]);
         }
- 
+
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
@@ -130,24 +121,24 @@ public function showallsales()
             'cnic'  => $input['cnic'],
 
         ]);
-         
+
         return response()->json([
             'success' => true,
             'message' => 'User registered succesfully, Use Login method to receive token.'
         ], 200);
     }
- 
 
 
-public function salesregister(Request $request)
+
+    public function salesregister(Request $request)
     {
-        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','cnic']);
+        $input = $request->only(['name', 'email', 'password', 'confirm_password', 'role', 'DOB', 'cnic']);
 
         $validate_data = [
             'name' => 'required|string|min:4',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'confirm_password' => 'same:password|required',
+            //'confirm_password' => 'same:password|required',
             // 'role'  => 'required',
             'DOB'  => 'required',
             'cnic'  => 'required',
@@ -163,162 +154,183 @@ public function salesregister(Request $request)
                 'errors' => $validator->errors()
             ]);
         }
- 
+
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'confirm_password' => Hash::make($input['confirm_password']),
-            'role'  => $input['role']="SalesPerson",
+            'role'  => $input['role'] = "SalesPerson",
             'DOB'  => $input['DOB'],
             'cnic'  => $input['cnic'],
 
         ]);
-         
+
         return response()->json([
             'success' => true,
             'message' => 'User registered succesfully, Use Login method to receive token.'
         ], 200);
     }
- 
 
-  public function update_sales(Request $request , $id)
+
+    public function update_sales(Request $request, $id)
     {
+        $sales = User::find($id);
+        if ($sales) {
 
-            $sales = new User();
-            $sales = User::find($id);
-            if($sales){
-            $sales->name=$request->name;
-            $sales->email=$request->email;
-            $sales->password=Hash::make($request->password);
-            $sales->confirm_password=Hash::make($request->confirm_password);
-            $sales->DOB=$request->DOB;
-            $sales->cnic=$request->cnic;
+            $sales->name = $request->name;
+            $sales->email = $request->email;
+            if (isset($request->password)) {
+
+                $sales->password = Hash::make($request->password);
+                $sales->confirm_password = Hash::make($request->confirm_password);
+            }
+            $sales->DOB = $request->DOB;
+            $sales->cnic = $request->cnic;
             $sales->save();
 
             return response()->json([
-            'success' => true,
-            'message' => 'Sales -> '.$id.' ->Details Updated Successfully.'
-        ], 200);
-
-            }
-            
-           
-
-            
-         }
+                'success' => true,
+                'message' => 'Sales -> ' . $id . ' ->Details Updated Successfully.'
+            ], 200);
+        }
+    }
 
 
 
-   public function update_admin(Request $request , $id)
+    public function update_admin(Request $request, $id)
     {
 
-            $sales = new User();
-            $sales = User::find($id);
+        $sales = new User();
+        $sales = User::find($id);
 
-            if($sales){
-            $sales->name=$request->name;
-            $sales->email=$request->email;
-            $sales->password=Hash::make($request->password);
-            $sales->confirm_password=Hash::make($request->confirm_password);
-            $sales->DOB=$request->DOB;
-            $sales->cnic=$request->cnic;
+        if ($sales) {
+            $sales->name = $request->name;
+            $sales->email = $request->email;
+            $sales->password = Hash::make($request->password);
+            $sales->confirm_password = Hash::make($request->confirm_password);
+            $sales->DOB = $request->DOB;
+            $sales->cnic = $request->cnic;
             $sales->save();
 
             return response()->json([
-            'success' => true,
-            'message' => 'Admin Details Updated Successfully.'
-        ], 200);
+                'success' => true,
+                'message' => 'Admin Details Updated Successfully.'
+            ], 200);
+        }
+    }
 
-            }
-         }      
 
-
-public function Usersregister(Request $request)
+    public function Usersregister(Request $request)
     {
-        $input = $request->only(['name', 'email', 'password','confirm_password','role','DOB','referal']);
+        try {
+            $input = $request->only(['name', 'email', 'password', 'confirm_password', 'role', 'DOB', 'referby']);
 
-        $validate_data = [
-            'name' => 'required|string|min:4',
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-            'confirm_password' => 'same:password|required',
-            'DOB'  => 'required',
-            'referal' => 'required',
-            'role' =>  'required',
+            $validate_data = [
+                'name' => 'required|string|min:4',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8',
+                // 'confirm_password' => 'same:password|required',
+                'DOB'  => 'required',
+                //'referal' => 'required',
+                'role' =>  'required',
 
-        ];
+            ];
 
-        $validator = Validator::make($input, $validate_data);
+            $validator = Validator::make($input, $validate_data);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Please see errors parameter for all errors. (UsersAuth Validator Error)',
-                'errors' => $validator->errors()
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Please see errors parameter for all errors. (UsersAuth Validator Error)',
+                    'errors' => $validator->errors()->first()
+                ]);
+            }
+
+            $user = User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+                'confirm_password' => Hash::make($input['confirm_password']),
+                'DOB'  => $input['DOB'],
+                'referal' => $input['referby'],
+                'role' => $input['role']
+
+
             ]);
-        }
-
-        $user = User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-            'confirm_password' => Hash::make($input['confirm_password']),
-            'DOB'  => $input['DOB'],
-            'referal' => $input['referal'],
-            'role' => $input['role']
-      ]);
-
-               //////second Validotor////
-        $input1 = $request->only(['firstname', 'lastname', 'email','DOB','gender','referby','referid','profilepic']);
-
-        $validate_data1 = [
-            'firstname' => 'required|string|min:4',
-            'lastname' => 'required|string|min:4',
-            'email' => 'required|email',
-            'DOB' => 'required|min:8',
-            'gender' => 'required',
-            'referby'  => 'required',
-            'referid'  => 'required',
-            'profilepic' =>'required',
 
 
-        ];
+            //////second Validotor////
+            $input1 = $request->only(['firstname', 'lastname', 'email', 'DOB', 'gender', 'referby', 'referprice', 'profilepic']);
 
-        $validator1 = Validator::make($input1, $validate_data1);
+            $validate_data1 = [
+                'firstname' => 'required|string|min:4',
+                'lastname' => 'required|string|min:4',
+                'email' => 'required|email',
+                'DOB' => 'required|min:8',
+                'gender' => 'required',
+                'referby'  => 'required',
+                'referprice'  => 'required',
+                'profilepic' => 'sometimes',
 
-        if ($validator1->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Please see errors parameter for all errors. (UsersValidator Error)',
-                'errors' => $validator1->errors()
-            ]);
-        }
-            $clients= new Customers();
+
+            ];
+
+            $validator1 = Validator::make($input1, $validate_data1);
+
+            if ($validator1->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Please see errors parameter for all errors. (UsersValidator Error)',
+                    'errors' => $validator1->errors()
+                ]);
+            }
+            $clients = new Customers();
             $lastId = User::latest('id')->pluck('id')->first();
-           // $newId = $lastId + 1;
-            $clients->client_id=$request->client_id=$lastId;
-            $clients->firstname=$request->firstname;
-            $clients->lastname=$request->lastname;
-            $clients->email=$request->email;
-            $clients->DOB=$request->DOB;
-            $clients->gender=$request->gender;
-            $clients->referby=$request->referby;
-            $clients->referid=$request->referid;
-            $clients->profilepic=$request->profilepic;
+            // $newId = $lastId + 1;
+            $clients->client_id = $lastId;
+            $clients->firstname = $request->firstname;
+            $clients->lastname = $request->lastname;
+            $clients->email = $request->email;
+            $clients->DOB = $request->DOB;
+            $clients->gender = $request->gender;
+            $clients->referby = $request->referby;
+            $clients->referprice = $request->referprice;
+            $clients->profilepic = $request->profilepic;
             $clients->save();
- 
 
-        //////second validator end////
 
+            //////second validator end////
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User registered succesfully, Use Login method to receive token.'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' =>  $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function show($id)
+    {
+        $user = User::where('id', $id)->get();
+
+        if ($user->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User Details Not Found'
+            ], 404);
+        }
         return response()->json([
             'success' => true,
-            'message' => 'User registered succesfully, Use Login method to receive token.'
+            'message' => 'User Details Found',
+            'data' => $user
         ], 200);
     }
- 
-
-
 
 
     // public function customerregister(Request $request)
@@ -345,7 +357,7 @@ public function Usersregister(Request $request)
     //             'errors' => $validator->errors()
     //         ]);
     //     }
- 
+
     //     $user = User::create([
     //         'name' => $input['name'],
     //         'email' => $input['email'],
@@ -356,13 +368,13 @@ public function Usersregister(Request $request)
     //         'cnic'  => $input['cnic'],
 
     //     ]);
-         
+
     //     return response()->json([
     //         'success' => true,
     //         'message' => 'User registered succesfully, Use Login method to receive token.'
     //     ], 200);
     // }
- 
+
 
 
 
@@ -382,7 +394,7 @@ public function Usersregister(Request $request)
         ];
 
         $validator = Validator::make($input, $validate_data);
-        
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -394,7 +406,7 @@ public function Usersregister(Request $request)
         // authentication attempt
         if (auth()->attempt($input)) {
             $token = auth()->user()->createToken('passport_token')->accessToken;
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'User login succesfully, Use token to authenticate.',
@@ -421,26 +433,6 @@ public function Usersregister(Request $request)
             'data' => auth()->user()
         ], 200);
     }
-
-
-    public function show($id)
-    {
-        $user = User::where('id', $id)->get();
-
-        if ($user->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'User Details Not Found'
-            ], 404);
-        }
-        return response()->json([
-            'success' => true,
-            'message' => 'User Details Found',
-            'data' => $user
-        ], 200);
-    }
-
-
 
     /**
      * Logout user.
