@@ -63,7 +63,7 @@ Route::post('salesperson/salesref/{id}', [RefererController::class, 'check_ref_s
 Route::post('clients/register', [PassportController::class, 'Usersregister']);
 Route::get('clients/showclients', [PassportController::class, 'showallclients']);
 Route::post('clients/login', [PassportController::class, 'login']);
-// Route::post('salesperson/updatesales/{id}', [PassportController::class, 'update_sales']);
+Route::post('clients/updatecustomer/{id}', [PassportController::class, 'UsersUpdate']);
 Route::get('salesperson/show/{id}', [PassportController::class, 'show']);
 
 Route::get('salesperson/showsales/{id}', [SalesController::class, 'show_single_sale_record']);

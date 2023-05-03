@@ -315,6 +315,53 @@ class PassportController extends Controller
     }
 
 
+    public function UsersUpdate(Request $request,$id)
+    {
+
+            $clients = new Customers();
+            $clients = Customers::find($id);
+            $clients->firstname = $request->firstname;
+            $clients->lastname = $request->lastname;
+            $clients->email = $request->email;
+            $clients->DOB = $request->DOB;
+            $clients->gender = $request->gender;
+            $clients->referby = $request->referby;
+            $clients->referprice = $request->referprice;
+            $clients->profilepic = $request->profilepic;
+            $clients->save();
+
+
+            //////second validator end////
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User Updated succesfully.'
+            ], 200);
+        }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function show($id)
     {
         $user = User::where('id', $id)->get();
