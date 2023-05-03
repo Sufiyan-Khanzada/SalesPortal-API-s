@@ -46,7 +46,7 @@ class RefererController extends Controller
 
     public function allrefers()
     {
-        $refers = Referers::all();
+        $refers = Referers::where('Refer_status','enable')->get();
         if ($refers->isEmpty()) {
             return response()->json([
                 'success' => true,
@@ -162,7 +162,7 @@ class RefererController extends Controller
             // echo $user->plan_price - $pricing1;
             $discount = Referers::where('id', $id)->value('Refer_value');
             $price = intval($user->Plan_price) - intval($discount);
-
+            $status = Referers::where('id', $id)->value('Refer_status');
             $data[] = [
                 'Plan_image' => $user->image,
                 'Plan_Name' => $user->Plan_title,
@@ -171,6 +171,8 @@ class RefererController extends Controller
                 'Plan_price' => "$" . $user->Plan_price,
                 'Referer_Discount' => "$" . $discount,
                 'Plan_price_after_discount' => "$" . $price,
+                'Referer_Status' => $status,
+                
 
             ];
 
