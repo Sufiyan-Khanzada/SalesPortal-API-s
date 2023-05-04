@@ -75,6 +75,7 @@ Route::get('clients/customer/{id}', [CustomersController::class, 'show_single_cu
 ///////////Purchase API's///////////////////
 Route::post('addorder', [PurchaseController::class, 'add']);
 Route::get('allorders', [PurchaseController::class, 'allPurchases']);
+Route::get('user-orders/{id}', [PurchaseController::class, 'userPurchases']);
 Route::post('delete-order/{id}', [PurchaseController::class, 'destroy_Purchases']);
 Route::post('update-order/{id}', [PurchaseController::class, 'update_Purchases']);
 
