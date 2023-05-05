@@ -31,6 +31,33 @@ class CustomersController extends Controller
         ], 200);
     }
 
+    public function allCustomer()
+    {
+        try {
+            $customers = Customers::join('users', 'users.id', '=', 'customers.referby')
+                ->leftJoin('referers', 'referers.id', '=', 'customers.referprice')
+                ->select('customers.*', 'users.name as refer_by_name', 'referers.refer_name')
+                ->get();
+            if (!$customers) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Purchasing Details Not Found'
+                ], 200);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Purchasing Details Found',
+                'data' => $customers
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'messagse' => $e->getmessage()
+            ]);
+        }
+    }
+
 
     public function show_single_customer($id)
     {

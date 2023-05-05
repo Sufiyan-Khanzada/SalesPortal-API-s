@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Customers;
 use App\Models\Pricings;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Purchases;
 use App\Models\Referers;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
     //
     public function allPurchases()
     {
-        $order = Purchases::all();
-        if ($order->isEmpty()) {
+        try {
+            $order = Purchases::select('purchases.*', DB::raw('GROUP_CONCAT(DISTINCT pricings.Plan_title) as plan_titles'))
+                ->join('pricings', function ($join) {
+                    $join->whereRaw('FIND_IN_SET(pricings.id, purchases.Product_ids)');
+                })
+                ->groupBy('purchases.id')
+                ->get();
+
+
+
             return response()->json([
                 'success' => true,
-                'message' => 'Purchases Not Found Done.',
-                // 'data' => $Items
+                'message' => 'Purchases Fetch Successfully Done.',
+                'data' => $order
 
-            ], 404);
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'messagse' => $e->getmessage()
+            ]);
         }
-        return response()->json([
-            'success' => true,
-            'message' => 'Purchases Fetch Successfully Done.',
-            'data' => $order
-
-        ], 200);
     }
     public function userPurchases($id)
     {
@@ -64,7 +73,25 @@ class PurchaseController extends Controller
         ]);
     }
 
+    public function sellerPurchases($id)
+    {
+        try {
+            $users = Customers::selectRaw('customers.*, referers.refer_name, referers.refer_value, (SELECT SUM(amount) FROM purchases WHERE purchases.user_id = customers.client_id) AS total_purchase_amount')
+                ->join('referers', 'referers.id', '=', 'customers.referprice')
+                ->where('referby', $id)
+                ->get();
+            return response()->json([
+                'success' => true,
+                'data' => $users
 
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'messagse' => $e->getmessage()
+            ]);
+        }
+    }
     public function update_Purchases(Request $request, $id)
     {
 

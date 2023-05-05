@@ -46,15 +46,7 @@ class RefererController extends Controller
 
     public function allrefers()
     {
-        $refers = Referers::where('Refer_status', 'enable')->get();
-        if ($refers->isEmpty()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Refers Not Found Done.',
-                // 'data' => $Items
-
-            ], 404);
-        }
+        $refers = Referers::where('Refer_status', 'enabled')->get();
         return response()->json([
             'success' => true,
             'message' => 'Refers Fetch Successfully Done.',

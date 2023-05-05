@@ -9,16 +9,16 @@ use App\Models\Purchases;
 class PurhcaseController extends Controller
 {
     //
-      public function allPurchases()
+    public function allPurchases()
     {
         $order = Purchases::all();
-        if($order->isEmpty()){
-        return response()->json([
-            'success' => true,
-            'message' => 'Purchases Not Found Done.',
-            // 'data' => $Items
+        if ($order->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Purchases Not Found Done.',
+                // 'data' => $Items
 
-        ], 404);        
+            ], 404);
         }
         return response()->json([
             'success' => true,
@@ -26,44 +26,41 @@ class PurhcaseController extends Controller
             'data' => $order
 
         ], 200);
-        
     }
 
 
 
-    public function update_Purchases(Request $request , $id)
+    public function update_Purchases(Request $request, $id)
     {
 
-            $order = new Purchases();
-            $order = Purchases::find($id);
-            $order->First_name=$request->First_name;
-            $order->Last_name=$request->Last_name;
-            $order->Email=$request->Email;
-            $order->Paymode=$request->Paymode;
-            $order->referid=$request->referid;
-            $order->referby=$request->referby;
-            $order->amount=$request->amount;
-            $ids=$request->Product_ids; 
-            $string = implode(",", $request->Product_ids); 
-            // $result = explode(",", $string); 
-            $order->Product_ids=$string; 
-            $order->Total=$request->Total;
-            $order->save();
+        $order = new Purchases();
+        $order = Purchases::find($id);
+        $order->First_name = $request->First_name;
+        $order->Last_name = $request->Last_name;
+        $order->Email = $request->Email;
+        $order->Paymode = $request->Paymode;
+        $order->referid = $request->referid;
+        $order->referby = $request->referby;
+        $order->amount = $request->amount;
+        $ids = $request->Product_ids;
+        $string = implode(",", $request->Product_ids);
+        // $result = explode(",", $string);
+        $order->Product_ids = $string;
+        $order->Total = $request->Total;
+        $order->save();
 
 
-            
-            
-            return response()->json([
+
+
+        return response()->json([
             'success' => true,
-            'message' => 'Order Number -> '.$id.' ->Details Updated Successfully.'
+            'message' => 'Order Number -> ' . $id . ' ->Details Updated Successfully.'
         ], 200);
-
-            
-         } 
+    }
 
 
 
-      public function add(Request $request)
+    public function add(Request $request)
     {
         $input = $request->all();
         $validator = Validator::make($input, [
@@ -75,9 +72,9 @@ class PurhcaseController extends Controller
             'referby' => 'required|string',
             'amount' => 'required|string',
             'Product_ids' => 'array|required',
-           
 
-    ]);
+
+        ]);
 
         if ($validator->fails()) {
             return response()->json([
@@ -85,25 +82,25 @@ class PurhcaseController extends Controller
                 'message' => 'Please see errors parameter for all errors.',
                 'errors' => $validator->errors()
             ]);
-        }  
-            
-            $order = new Purchases();
-            $order->First_name=$request->First_name;
-            $order->Last_name=$request->Last_name;
-            $order->Email=$request->Email;
-            $order->Paymode=$request->Paymode;
-            $order->referid=$request->referid;
-            $order->referby=$request->referby;
-            $order->amount=$request->amount;
-            $ids=$request->Product_ids; 
+        }
 
-            $string = implode(",", $request->Product_ids); 
-            // $result = explode(",", $string); 
-            $order->Product_ids=$string; 
-            $order->save();
+        $order = new Purchases();
+        $order->First_name = $request->First_name;
+        $order->Last_name = $request->Last_name;
+        $order->Email = $request->Email;
+        $order->Paymode = $request->Paymode;
+        $order->referid = $request->referid;
+        $order->referby = $request->referby;
+        $order->amount = $request->amount;
+        $ids = $request->Product_ids;
+
+        $string = implode(",", $request->Product_ids);
+        // $result = explode(",", $string);
+        $order->Product_ids = $string;
+        $order->save();
 
 
-         
+
         return response()->json([
             'success' => true,
             'message' => 'Items Added to Cart'
@@ -113,17 +110,15 @@ class PurhcaseController extends Controller
 
 
 
- public function destroy_order($id)
-          {
+    public function destroy_order($id)
+    {
         $delete_pro = Purchases::find($id);
-    
+
         $delete_pro->delete();
- 
+
         return response()->json([
             'success' => true,
-            'message' => 'Order Number->'.$id.'->Remove Successfully Done.'
+            'message' => 'Order Number->' . $id . '->Remove Successfully Done.'
         ], 200);
-    
-
-}
+    }
 }

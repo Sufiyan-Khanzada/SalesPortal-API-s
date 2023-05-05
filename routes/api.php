@@ -69,6 +69,7 @@ Route::get('salesperson/show/{id}', [PassportController::class, 'show']);
 Route::get('salesperson/showsales/{id}', [SalesController::class, 'show_single_sale_record']);
 
 Route::post('clients/allpurchasings/{id}', [CustomersController::class, 'show_single_customer_record']);
+Route::get('clients/all', [CustomersController::class, 'allCustomer']);
 
 Route::get('clients/customer/{id}', [CustomersController::class, 'show_single_customer']);
 
@@ -76,6 +77,7 @@ Route::get('clients/customer/{id}', [CustomersController::class, 'show_single_cu
 Route::post('addorder', [PurchaseController::class, 'add']);
 Route::get('allorders', [PurchaseController::class, 'allPurchases']);
 Route::get('user-orders/{id}', [PurchaseController::class, 'userPurchases']);
+Route::get('seller-orders/{id}', [PurchaseController::class, 'sellerPurchases']);
 Route::post('delete-order/{id}', [PurchaseController::class, 'destroy_Purchases']);
 Route::post('update-order/{id}', [PurchaseController::class, 'update_Purchases']);
 

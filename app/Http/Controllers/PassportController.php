@@ -315,29 +315,33 @@ class PassportController extends Controller
     }
 
 
-    public function UsersUpdate(Request $request,$id)
+    public function UsersUpdate(Request $request, $id)
     {
 
-            $clients = new Customers();
-            $clients = Customers::find($id);
-            $clients->firstname = $request->firstname;
-            $clients->lastname = $request->lastname;
-            $clients->email = $request->email;
-            $clients->DOB = $request->DOB;
-            $clients->gender = $request->gender;
-            $clients->referby = $request->referby;
-            $clients->referprice = $request->referprice;
-            $clients->profilepic = $request->profilepic;
-            $clients->save();
+        $clients =  Customers::where('client_id', $id)->first();
+        $user =  User::find($id);
 
+        $clients->firstname = $request->fname;
+        $clients->lastname = $request->lname;
+        $clients->email = $request->email;
+        $clients->DOB = $request->DOB;
+        $clients->gender = isset($request->gender) ? $request->gender : $clients->gender;
+        $clients->profilepic = $request->image;
+        $clients->save();
 
-            //////second validator end////
+        $user->name = $request->fname . " " . $request->lname;
+        $user->email = $request->email;
+        $user->DOB = $request->DOB;
+        $user->cnic = isset($request->cnic) ? $request->cnic : $user->cnic;
+        $user->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'User Updated succesfully.'
-            ], 200);
-        }   
+        //////second validator end////
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User Updated succesfully.'
+        ], 200);
+    }
 
 
 
